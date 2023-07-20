@@ -1,2 +1,2 @@
 # UNet
- UNet Investigation for Semantic Segmentation
+Investigation into UNets for the purpose of Semantic Segmentation
