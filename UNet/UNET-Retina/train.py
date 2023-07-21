@@ -20,7 +20,7 @@ args = parser.parse_args()
 # Hyperparameters etc.
 LEARNING_RATE = 1e-4
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-BATCH_SIZE = 16
+BATCH_SIZE = 50
 NUM_EPOCHS = 1
 NUM_WORKERS = 2
 IMAGE_HEIGHT = 160 # 1280 originally
@@ -31,7 +31,6 @@ TRAIN_IMG_DIR = "data/Carvana/train_images/"
 TRAIN_MASK_DIR = "data/Carvana/train_masks/"
 VAL_IMG_DIR = "data/Carvana/val_images/"
 VAL_MASK_DIR = "data/Carvana/val_masks/"
-
 
 def train_fn(loader, model, optimizer, loss_fn, scaler):
     loop = tqdm(loader)
@@ -83,15 +82,15 @@ def main():
         ],
     )
     
-    if args == 0:
-        model = UNet(in_channels=3, out_channels=1).to(DEVICE)
-        print("U-Net")
-    elif args == 1:
-        model = UNetPP(in_channels=3, out_channels=1).to(DEVICE)
-        print("U-Net++")
-    else:
-        model = AUNet(in_channels=3, out_channels=1).to(DEVICE)
-        print("Attention U-Net")
+    # if args == 0:
+    model = UNet(in_channels=3, out_channels=1).to(DEVICE)
+    print("U-Net")
+    # elif args == 1:
+    #     model = UNetPP(in_channels=3, out_channels=1).to(DEVICE)
+    #     print("U-Net++")
+    # else:
+    #     model = AUNet(in_channels=3, out_channels=1).to(DEVICE)
+    #     print("Attention U-Net")
     loss_fn = nn.BCEWithLogitsLoss()
     optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE)
 
