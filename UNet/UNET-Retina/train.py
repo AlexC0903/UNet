@@ -82,15 +82,15 @@ def main():
         ],
     )
     
-    # if args == 0:
-    model = UNet(in_channels=3, out_channels=1).to(DEVICE)
-    print("U-Net")
-    # elif args == 1:
-    #     model = UNetPP(in_channels=3, out_channels=1).to(DEVICE)
-    #     print("U-Net++")
-    # else:
-    #     model = AUNet(in_channels=3, out_channels=1).to(DEVICE)
-    #     print("Attention U-Net")
+    if args == 0:
+        model = UNet(in_channels=3, out_channels=1).to(DEVICE)
+        print("U-Net")
+    elif args == 1:
+        model = UNetPP(in_channels=3, out_channels=1).to(DEVICE)
+        print("U-Net++")
+    else:
+        model = AUNet(in_channels=3, out_channels=1).to(DEVICE)
+        print("Attention U-Net")
     loss_fn = nn.BCEWithLogitsLoss()
     optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE)
 
